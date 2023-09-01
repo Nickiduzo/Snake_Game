@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Button : MonoBehaviour
+public class ButtonUI : MonoBehaviour
 {
     [SerializeField] private Transform targetPosition;
     [SerializeField] private float moveDuration;
