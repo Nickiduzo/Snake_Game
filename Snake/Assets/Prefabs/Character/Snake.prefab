@@ -264,7 +264,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3330412626757166169}
   - component: {fileID: 6232323984227755729}
-  - component: {fileID: 7694801048241510724}
   - component: {fileID: 8978759128735895460}
   - component: {fileID: 4489823710124381163}
   m_Layer: 0
@@ -304,33 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd94239c1968ed048b4bca58db3c2657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSystem: {fileID: 0}
   losePanel: {fileID: 0}
---- !u!61 &7694801048241510724
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3817737603468212074}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &8978759128735895460
 Rigidbody2D:
   serializedVersion: 4

@@ -1,122 +1,47 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    [SerializeField] private SoundSystem soundSystem;
-    [SerializeField] private GameObject losePanel;
-    private Vector2 currentDirection = Vector2.right; // Текущее направление движения
-    private float timeToMove = 0.5f;
-    private List<Transform> bodySegments = new List<Transform>(); // Сегменты тела змейки
+    [SerializeField] private GameObject snakeSegment;
+    private List<GameObject> snakeSegments;
+    private Vector2 currentDirection = Vector2.right;
 
-    void Start()
+    private float moveInterval = 0.5f;
+    private float timer = 0f;
+    private void Update()
     {
-        bodySegments.Add(transform);
-        CreateBodySegment();
-    }
+        timer += Time.deltaTime;
 
-    void FixedUpdate()
-    {
-        if (timeToMove <= 0f)
+        if (timer >= moveInterval)
         {
             MoveSnake();
-            timeToMove = 0.5f;
+            timer = 0f; 
         }
-        else
-        {
-            timeToMove -= Time.fixedDeltaTime;
-        }
+    }
+    public void LeftArrow()
+    {
+        RotateSnake(90f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void RightArrow()
     {
-        if (collision.gameObject.CompareTag("Block"))
-        {
-            losePanel.SetActive(true);
-            soundSystem.PlaySound("Block");
-        }
-        else if (collision.gameObject.CompareTag("Food"))
-        {
-            collision.gameObject.SetActive(false);
-            CreateBodySegment();
-            timeToMove += 0.1f;
-            Score.IncreaseScore();
-            soundSystem.PlaySound("Eat");
-        }
-        else if (collision.gameObject.CompareTag("Bomb"))
-        {
-            collision.gameObject.SetActive(false);
-            Score.DecreaseScore();
-            soundSystem.PlaySound("Bomb");
-        }
+        RotateSnake(-90f);
     }
-    private void CreateBodySegment()
+    private void RotateSnake(float angle)
     {
-        GameObject segment = new GameObject("SnakeSegment");
-        segment.transform.position = bodySegments[bodySegments.Count - 1].position;
-        bodySegments.Add(segment.transform);
-    }
+        float currentAngle = transform.eulerAngles.z;
 
-    // Поворот вліво
-    public void TurnLeft()
-    {
-        if (currentDirection == Vector2.up)
-        {
-            currentDirection = Vector3.left;
-            currentDirection = Quaternion.Euler(0, 0, 180) * currentDirection;
-        }
-        else if (currentDirection == Vector2.left)
-        {
-            currentDirection = Vector2.down;
-            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
-        }
-        else if (currentDirection == Vector2.down)
-        {
-            currentDirection = Vector3.right;
-            currentDirection = Quaternion.Euler(0, 0, -90) * currentDirection;
-        }
-        else if (currentDirection == Vector2.right)
-        {
-            currentDirection = Vector3.up;
-        }
-    }
+        currentAngle += angle;
 
-    // Поворот вправо
-    public void TurnRight()
-    {
-        if (currentDirection == Vector2.up)
-        {
-            currentDirection = Vector2.right;
-            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
-        }
-        else if (currentDirection == Vector2.right)
-        {
-            currentDirection = Vector2.down;
-            currentDirection = Quaternion.Euler(0, 0, -90) * currentDirection;
-        }
-        else if (currentDirection == Vector2.down)
-        {
-            currentDirection = Vector2.left;
-            currentDirection = Quaternion.Euler(0, 0, 180) * currentDirection;
-        }
-        else if (currentDirection == Vector2.left)
-        {
-            currentDirection = Vector2.up;
-            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
-        }
-    }
+        transform.eulerAngles = new Vector3(0f, 0f, currentAngle);
 
-    // Рух змейки
+        currentDirection = Quaternion.Euler(0f, 0f, angle) * currentDirection;
+    }
     private void MoveSnake()
     {
-        Vector2 previousPosition = transform.position;
-        transform.position += (Vector3)currentDirection * 0.25f;
+        Vector2 newHeadPosition = (Vector2)transform.position + currentDirection * 0.25f;
 
-        for (int i = 1; i < bodySegments.Count; i++)
-        {
-            Vector2 temp = bodySegments[i].position;
-            bodySegments[i].position = previousPosition;
-            previousPosition = temp;
-        }
+        transform.position = newHeadPosition;
     }
 }
