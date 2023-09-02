@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7901940103698506271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7180995766220669199}
+  - component: {fileID: 8359195303326223187}
+  - component: {fileID: 8748065750207562555}
+  m_Layer: 0
+  m_Name: SoundSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7180995766220669199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901940103698506271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5106151, y: -0.19076288, z: 394.7909}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8359195303326223187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901940103698506271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663d1018ffd8d684294016455b6335b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Button
+    clip: {fileID: 8300000, guid: 31ad74d6b065b5440be74a5ce88e2e94, type: 3}
+    volume: 0.1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: Eat
+    clip: {fileID: 8300000, guid: e2ec216c9aa3b9e4b8eacc65d1b24ee6, type: 3}
+    volume: 0.2
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: Block
+    clip: {fileID: 8300000, guid: 2d43e3b827731024e9e06d7658c23d53, type: 3}
+    volume: 0.1
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: Bomb
+    clip: {fileID: 8300000, guid: d4dfbbe4fc662404ab75d992c7fb33a1, type: 3}
+    volume: 0.1
+    pitch: 1
+    audioSource: {fileID: 0}
+--- !u!114 &8748065750207562555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901940103698506271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adcb9713a3a04f149a1745e37d89516d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

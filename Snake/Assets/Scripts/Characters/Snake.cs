@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Snake : MonoBehaviour
 {
+    [SerializeField] private SoundSystem soundSystem;
     [SerializeField] private GameObject losePanel;
     private Vector2 currentDirection = Vector2.right; // Текущее направление движения
     private float timeToMove = 0.5f;
@@ -10,7 +11,6 @@ public class Snake : MonoBehaviour
 
     void Start()
     {
-        // Изначально змейка состоит из двух сегментов
         bodySegments.Add(transform);
         CreateBodySegment();
     }
@@ -32,12 +32,24 @@ public class Snake : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Block"))
         {
-            Time.timeScale = 0f;
             losePanel.SetActive(true);
+            soundSystem.PlaySound("Block");
+        }
+        else if (collision.gameObject.CompareTag("Food"))
+        {
+            collision.gameObject.SetActive(false);
+            CreateBodySegment();
+            timeToMove += 0.1f;
+            Score.IncreaseScore();
+            soundSystem.PlaySound("Eat");
+        }
+        else if (collision.gameObject.CompareTag("Bomb"))
+        {
+            collision.gameObject.SetActive(false);
+            Score.DecreaseScore();
+            soundSystem.PlaySound("Bomb");
         }
     }
-
-    // Создать новый сегмент тела змейки
     private void CreateBodySegment()
     {
         GameObject segment = new GameObject("SnakeSegment");
@@ -45,59 +57,66 @@ public class Snake : MonoBehaviour
         bodySegments.Add(segment.transform);
     }
 
-    // Повернуть влево
+    // Поворот вліво
     public void TurnLeft()
     {
         if (currentDirection == Vector2.up)
         {
-            currentDirection = Vector2.left;
+            currentDirection = Vector3.left;
+            currentDirection = Quaternion.Euler(0, 0, 180) * currentDirection;
         }
         else if (currentDirection == Vector2.left)
         {
             currentDirection = Vector2.down;
+            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
         }
         else if (currentDirection == Vector2.down)
         {
-            currentDirection = Vector2.right;
+            currentDirection = Vector3.right;
+            currentDirection = Quaternion.Euler(0, 0, -90) * currentDirection;
         }
         else if (currentDirection == Vector2.right)
         {
-            currentDirection = Vector2.up;
+            currentDirection = Vector3.up;
         }
     }
 
-    // Повернуть вправо
+    // Поворот вправо
     public void TurnRight()
     {
         if (currentDirection == Vector2.up)
         {
             currentDirection = Vector2.right;
+            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
         }
         else if (currentDirection == Vector2.right)
         {
             currentDirection = Vector2.down;
+            currentDirection = Quaternion.Euler(0, 0, -90) * currentDirection;
         }
         else if (currentDirection == Vector2.down)
         {
             currentDirection = Vector2.left;
+            currentDirection = Quaternion.Euler(0, 0, 180) * currentDirection;
         }
         else if (currentDirection == Vector2.left)
         {
             currentDirection = Vector2.up;
+            currentDirection = Quaternion.Euler(0, 0, 0) * currentDirection;
         }
     }
 
-    // Двигать змейку
+    // Рух змейки
     private void MoveSnake()
     {
-        // Двигаем каждый сегмент тела
-        for (int i = bodySegments.Count - 1; i > 0; i--)
-        {
-            bodySegments[i].position = bodySegments[i - 1].position;
-        }
+        Vector2 previousPosition = transform.position;
+        transform.position += (Vector3)currentDirection * 0.25f;
 
-        // Двигаем голову
-        Vector2 newHeadPosition = (Vector2)transform.position + currentDirection * 0.25f;
-        transform.position = newHeadPosition;
+        for (int i = 1; i < bodySegments.Count; i++)
+        {
+            Vector2 temp = bodySegments[i].position;
+            bodySegments[i].position = previousPosition;
+            previousPosition = temp;
+        }
     }
 }
