@@ -3163,7 +3163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2080653573
 Transform:
   m_ObjectHideFlags: 0
@@ -3646,6 +3646,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snake
       objectReference: {fileID: 0}
+    - target: {fileID: 3817737603468212074, guid: f308b43c96009764f84c5e355e50ea9a, type: 3}
+      propertyPath: m_TagString
+      value: Snake
+      objectReference: {fileID: 0}
     - target: {fileID: 5366805414029554681, guid: f308b43c96009764f84c5e355e50ea9a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3662,6 +3666,10 @@ PrefabInstance:
       propertyPath: bombPrefab
       value: 
       objectReference: {fileID: 7055998296358578258, guid: ee9ad52aa2205fe4c905cfa507d8afc9, type: 3}
+    - target: {fileID: 6232323984227755729, guid: f308b43c96009764f84c5e355e50ea9a, type: 3}
+      propertyPath: bodySegment
+      value: 
+      objectReference: {fileID: 3057679677642486796, guid: 166c3b907d9c04d4b8899ff09f49bd1a, type: 3}
     - target: {fileID: 6232323984227755729, guid: f308b43c96009764f84c5e355e50ea9a, type: 3}
       propertyPath: soundSystem
       value: 

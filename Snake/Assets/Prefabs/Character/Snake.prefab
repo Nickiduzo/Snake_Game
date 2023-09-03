@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd94239c1968ed048b4bca58db3c2657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundSystem: {fileID: 0}
   losePanel: {fileID: 0}
+  bodySegment: {fileID: 0}
 --- !u!50 &8978759128735895460
 Rigidbody2D:
   serializedVersion: 4
